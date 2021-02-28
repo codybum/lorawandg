@@ -1,4 +1,4 @@
-package lorawandg;
+package io.cresco.lorawandg;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

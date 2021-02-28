@@ -1,4 +1,4 @@
-package lorawandg;
+package io.cresco.lorawandg;
 
 import com.google.gson.Gson;
 import io.cresco.library.data.TopicType;
@@ -41,10 +41,10 @@ public class MessageSender implements Runnable  {
 
         try {
             while (!plugin.isActive()) {
-                logger.error("Sender: Wait until plugin is active...");
+                logger.info("Sender: Wait until plugin is active...");
                 Thread.sleep(1000);
             }
-
+            logger.info("Sender: Starting to send messages...");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

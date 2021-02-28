@@ -1,4 +1,4 @@
-package lorawandg;
+package io.cresco.lorawandg;
 
 public class Ticker {
     String source;

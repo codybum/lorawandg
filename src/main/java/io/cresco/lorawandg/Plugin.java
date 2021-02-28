@@ -1,4 +1,4 @@
-package lorawandg;
+package io.cresco.lorawandg;
 
 
 import io.cresco.library.agent.AgentService;
@@ -74,7 +74,6 @@ public class Plugin implements PluginService {
     public boolean isStarted() {
 
         try {
-            logger.error("WOOR");
             pluginBuilder = new PluginBuilder(this.getClass().getName(), context, map);
             this.logger = pluginBuilder.getLogger(Plugin.class.getName(), CLogger.Level.Info);
             //this.executor = new ExecutorImpl(pluginBuilder, me);

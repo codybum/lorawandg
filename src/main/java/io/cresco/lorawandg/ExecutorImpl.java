@@ -1,4 +1,4 @@
-package lorawandg;
+package io.cresco.lorawandg;
 
 import com.google.gson.Gson;
 import io.cresco.library.messaging.MsgEvent;
