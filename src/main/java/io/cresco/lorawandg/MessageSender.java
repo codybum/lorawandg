@@ -14,12 +14,15 @@ public class MessageSender implements Runnable  {
     private CLogger logger;
     private Gson gson;
     //private MeasurementEngine me;
+    String inputStreamName;
+
 
     //public MessageSender(PluginBuilder plugin, MeasurementEngine me) {
     public MessageSender(PluginBuilder plugin) {
         this.plugin = plugin;
         logger = plugin.getLogger(this.getClass().getName(), CLogger.Level.Info);
         gson = new Gson();
+        inputStreamName = plugin.getConfig().getStringParam("input_stream_name",plugin.getPluginID().replace("-",""));
         //this.me = me;
         //set metrics
         //metricInit();
@@ -44,7 +47,7 @@ public class MessageSender implements Runnable  {
                 logger.info("Sender: Wait until plugin is active...");
                 Thread.sleep(1000);
             }
-            logger.info("Sender: Starting to send messages...");
+            logger.info("Sender: Sending to input_stream_name: " + inputStreamName);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -69,7 +72,9 @@ public class MessageSender implements Runnable  {
         try {
 
             //String inputStreamName = "UserStream";
-            String inputStreamName = plugin.getConfig().getStringParam("pluginID").replace("-","");
+
+            //String inputStreamName = plugin.getConfig().getStringParam("input_stream_name",plugin.getPluginID().replace("-",""));
+            //String inputStreamName = plugin.getConfig().getStringParam("pluginID").replace("-","");
 
             TextMessage tickle = plugin.getAgentService().getDataPlaneService().createTextMessage();
             tickle.setText(getStringPayload());
@@ -96,9 +101,9 @@ public class MessageSender implements Runnable  {
 
         try{
 
-            String source = "mysource";
-            String urn = "myurn";
-            String metric = "mymetric";
+            String source = plugin.getConfig().getStringParam("source_name","mysource");
+            String urn = plugin.getConfig().getStringParam("urn","myurn");
+            String metric = plugin.getConfig().getStringParam("metric_name","mymetric");
             long ts = System.nanoTime();
 
             Random r = new Random();
